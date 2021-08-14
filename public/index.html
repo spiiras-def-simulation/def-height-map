@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Конфигурация карты</title>
+
+    <link rel="stylesheet" type="text/css" href="index.css" />
+  </head>
+  <body>
+    <form id="load_map_form" class="data_form">
+      <p class="form_row form_title">Файл карты</p>
+      <p class="form_row"><input type="file" name="map" /></p>
+      <p class="form_row"><input type="submit" /></p>
+    </form>
+    <form id="load_map_config_form" class="data_form">
+      <p class="form_row form_title">Параметры карты</p>
+      <div class="form_row form_center">
+        <input
+          class="center_coordinate input_field"
+          placeholder="Долгота"
+          type="text"
+          name="centerLongitude"
+        />
+        <input
+          class="center_coordinate input_field"
+          placeholder="Широта"
+          type="text"
+          name="centerLatitude"
+        />
+      </div>
+      <p class="form_row">
+        <input class="input_field" placeholder="Размер(м)" type="text" name="distance" />
+      </p>
+      <p class="form_row">
+        <input class="input_field" placeholder="Масштаб" type="text" name="scale" />
+      </p>
+      <p class="form_row">
+        <input class="input_field" placeholder="Наиб. высота" type="text" name="height" />
+      </p>
+      <p class="form_row"><input className="submit_button" type="submit" /></p>
+    </form>
+    <form id="analyse_map_form" class="data_form">
+      <p class="form_row"><input className="submit_button" type="submit" value="Анализ карты" /></p>
+    </form>
+
+    <script src="index.js"></script>
+  </body>
+</html>
