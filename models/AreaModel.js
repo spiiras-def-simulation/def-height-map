@@ -24,13 +24,29 @@ class AreaModel extends Model {
   }
 
   async addAreas(areas) {
-    const input = { ban: Object.values(areas) };
+    const dataResponse = await Promise.all(
+      Object.values(areas).map((area) =>
+        this.getData({
+          queue: queues.ADD_OBJECTS,
+          message: {
+            ban: {
+              type: 'Feature',
+              properties: { analysed: true },
+              geometry: {
+                type: 'Polygon',
+                coordinates: [area],
+              },
+            },
+          },
+        }),
+      ),
+    );
 
-    const dataResponse = await this.getData({ queue: queues.ADD_OBJECTS, message: { ...input } });
+    const data = dataResponse
+      .filter((result) => !!result && !this.checkFailedResponse(result))
+      .map((result) => result['id_list'][0]);
 
-    if (this.checkFailedResponse(dataResponse)) return null;
-
-    return dataResponse;
+    return data || null;
   }
 
   analyseHeights(analyser, map, distance, scale, height) {
